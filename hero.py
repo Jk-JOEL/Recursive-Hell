@@ -1,4 +1,5 @@
 import random
+from time import sleep
 
 class Hero:
     def __init__(self, name, integrity):
@@ -16,6 +17,7 @@ class Hero:
         
         # IDENTITY GLITCH: Triggers between 1 and 49 integrity
         if 0 < new_integrity < 50:
+            
             if len(self.name) <= 1:
                 # Replace single char with 3 random symbols
                 new_name = "".join([random.choice("!@#$%^&*") for _ in range(3)])
@@ -24,7 +26,6 @@ class Hero:
                 char_list = list(self.name)
                 random.shuffle(char_list)
                 new_name = "".join(char_list)
-            print(f">>> ERROR: Identity Corruption... New ID: {new_name}")
 
         if new_integrity == 0:
             # The Singularity
@@ -34,6 +35,31 @@ class Hero:
         return Hero(new_name, new_integrity)
 
 
-hero = Hero("Hermit", 100)
-hero = hero - 60
-print(hero)
+hero = Hero("Hermit", 250)
+
+bpm = 170.00 
+counter = 0
+
+import time
+import random
+
+# --- SETTINGS ---
+bpm_delay = 0.35  # 170 BPM
+beat_count = 0
+
+while hero.integrity > 0:
+    time.sleep(bpm_delay)
+    beat_count += 1
+    
+    # EVERY 4TH BEAT: Trigger the Identity Glitch
+    if beat_count % 4 == 0:
+        # Subtracting 5 instead of 1 to speed up the decay on the snare
+        hero = hero - 5
+        print(f"[SNARE HIT] {hero}")
+    else:
+        # Normal steady decay on the other beats
+        hero = hero - 1
+        print(f" (kick)   {hero.integrity}%")
+
+print("\n--- SYSTEM HALTED: SINGULARITY REACHED ---")
+    
