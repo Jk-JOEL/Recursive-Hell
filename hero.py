@@ -41,10 +41,6 @@ hero = Hero("Hermit", 250)
 bpm = 170.00 
 counter = 0
 
-import time
-import random
-import sys
-
 # --- SETTINGS ---
 bpm_delay = 0.35  # 170 BPM
 beat_count = 0
