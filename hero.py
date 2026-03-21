@@ -1,5 +1,6 @@
 import random
-from time import sleep
+import time
+import sys # Using later
 
 class Hero:
     def __init__(self, name, integrity):
@@ -42,6 +43,7 @@ counter = 0
 
 import time
 import random
+import sys
 
 # --- SETTINGS ---
 bpm_delay = 0.35  # 170 BPM
@@ -59,7 +61,8 @@ while hero.integrity > 0:
     else:
         # Normal steady decay on the other beats
         hero = hero - 1
-        print(f" (kick)   {hero.integrity}%")
+        print(f" (kick)   {hero.integrity}")
+    sys.stdout.flush()
 
 print("\n--- SYSTEM HALTED: SINGULARITY REACHED ---")
     
