@@ -1,6 +1,6 @@
 import random
 import time
-import sys # Using later
+import sys
 
 class Hero:
     def __init__(self, name, integrity):
@@ -8,57 +8,68 @@ class Hero:
         self.integrity = integrity
 
     def __repr__(self):
-        return f"Hero(name='{self.name}', integrity={self.integrity})"
+        return f"ID:{self.name} | INT:{self.integrity}"
 
     def __sub__(self, amount):
-        # abs() ensures we ALWAYS subtract, even if input is negative
         clean_amount = abs(amount)
         new_integrity = max(0, self.integrity - clean_amount)
         new_name = self.name
         
-        # IDENTITY GLITCH: Triggers between 1 and 49 integrity
         if 0 < new_integrity < 50:
-            
-            if len(self.name) <= 1:
-                # Replace single char with 3 random symbols
-                new_name = "".join([random.choice("!@#$%^&*") for _ in range(3)])
-            else:
-                # Scramble existing name
-                char_list = list(self.name)
-                random.shuffle(char_list)
-                new_name = "".join(char_list)
+            char_list = list(self.name)
+            if random.random() < 0.3:
+                char_list.append(random.choice("!@#$%^&*░▒▓"))
+            random.shuffle(char_list)
+            new_name = "".join(char_list)[:10]
 
         if new_integrity == 0:
-            # The Singularity
-            print(f"\n[VOICE_LOG]: {new_name} says: 'I am... becoming a constant.'")
+            print(f"\n[VOICE_LOG]: {new_name} -> 'CONSTANT REACHED.'")
             return Hero(new_name, 0)
             
         return Hero(new_name, new_integrity)
 
-
-hero = Hero("Hermit", 250)
-
-bpm = 170.00 
-counter = 0
-
-# --- SETTINGS ---
-bpm_delay = 0.35  # 170 BPM
+hero = Hero("Hermit", 150)
+# Settings for the bar
+bar_max_width = 20
+total_start_integrity = hero.integrity 
 beat_count = 0
+bpm_delay = round(60.00 / 170.00, 2)
 
 while hero.integrity > 0:
     time.sleep(bpm_delay)
-    beat_count += 1
+    beat_count = (beat_count % 4) + 1
     
-    # EVERY 4TH BEAT: Trigger the Identity Glitch
-    if beat_count % 4 == 0:
-        # Subtracting 5 instead of 1 to speed up the decay on the snare
-        hero = hero - 5
-        print(f"[SNARE HIT] {hero}")
+    # 1. Calculate bar fill
+    # Using 'int' to keep it to whole blocks
+    fill_count = int((hero.integrity / total_start_integrity) * bar_max_width)
+    bar = "█" * fill_count + "░" * (bar_max_width - fill_count)
+    
+    # 2. Add Jitter for that glitch feel
+    jitter = " " * random.randint(0, 8)
+    
+    # 3. Execution
+    if beat_count == 4:
+        hero = hero - 8
+        print(f"{jitter}[{bar}] SNARE! -> {hero.name}")
     else:
-        # Normal steady decay on the other beats
-        hero = hero - 1
-        print(f" (kick)   {hero.integrity}")
+        hero = hero - 2
+        print(f"{jitter}[{bar}] kick")
+        
     sys.stdout.flush()
+
+# The System Crash Visual
+singularity_art = """
+[ ! ] ERROR: CORE_INTEGRITY_FAILURE
+[ ! ] IDENTITY: 0% 
+[ ! ] RECURSIVE LOOP TERMINATED
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+░░█▀█░█▀█░█▀█░█▀█░█▀█░█▀█░█▀█░░
+░░█▄█░█▄█░█▄█░█▄█░█▄█░█▄█░█▄█░░
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+[ ! ] STATUS: BECOMING A CONSTANT.
+"""
+print(singularity_art)
+
 
 print("\n--- SYSTEM HALTED: SINGULARITY REACHED ---")
     
