@@ -6,6 +6,7 @@ class Hero:
     def __init__(self, name, integrity):
         self.name = name
         self.integrity = integrity
+        self.beats_survived = 0
 
     def __repr__(self):
         return f"ID:{self.name} | INT:{self.integrity}"
@@ -38,6 +39,8 @@ bpm_delay = round(60.00 / 170.00, 2)
 print("Starting...") # Just making sure it's synced right on my end
 
 while hero.integrity > 0:
+
+    print("\n")
     time.sleep(bpm_delay)
     beat_count = (beat_count % 4) + 1
     
@@ -50,7 +53,6 @@ while hero.integrity > 0:
     jitter = " " * random.randint(0, 8)
     
     # 3. Execution
-    print("/n")
     if beat_count == 4:
         hero = hero - 8
         print(f"{jitter}[{bar}] SNARE! -> {hero.name}")
@@ -58,9 +60,17 @@ while hero.integrity > 0:
         hero = hero - 2
         print(f"{jitter}[{bar}] kick")
         
+    hero.beats_survived += 1
+    
     sys.stdout.flush()
 
-# The System Crash Visual
+
+
+# In your Singularity Print:
+print(f"Hero Lifespan: {hero.beats_survived} Beats(Months).")
+print("Solving...\n")
+time.sleep(2.5)
+
 singularity_art = """
 [ ! ] ERROR: CORE_INTEGRITY_FAILURE
 [ ! ] IDENTITY: 0% 
@@ -73,6 +83,6 @@ singularity_art = """
 """
 time.sleep(1) # Dramatic pause before the crash
 print(singularity_art)
-sys.stdout.flush()# Online Python - IDE, Editor, Compiler, Interpreter
+sys.stdout.flush() # Online Python - IDE, Editor, Compiler, Interpreter
 
     
