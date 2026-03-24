@@ -50,6 +50,7 @@ while hero.integrity > 0:
     jitter = " " * random.randint(0, 8)
     
     # 3. Execution
+    print("/n")
     if beat_count == 4:
         hero = hero - 8
         print(f"{jitter}[{bar}] SNARE! -> {hero.name}")
