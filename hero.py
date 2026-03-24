@@ -35,6 +35,8 @@ total_start_integrity = hero.integrity
 beat_count = 0
 bpm_delay = round(60.00 / 170.00, 2)
 
+print("Starting...") # Just making sure it's synced right on my end
+
 while hero.integrity > 0:
     time.sleep(bpm_delay)
     beat_count = (beat_count % 4) + 1
@@ -68,8 +70,8 @@ singularity_art = """
 ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 [ ! ] STATUS: BECOMING A CONSTANT.
 """
+time.sleep(1) # Dramatic pause before the crash
 print(singularity_art)
+sys.stdout.flush()# Online Python - IDE, Editor, Compiler, Interpreter
 
-
-print("\n--- SYSTEM HALTED: SINGULARITY REACHED ---")
     
