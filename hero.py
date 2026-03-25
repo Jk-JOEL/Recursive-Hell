@@ -67,7 +67,7 @@ while hero.integrity > 0:
 
 
 # In your Singularity Print:
-print(f"Hero Lifespan: {hero.beats_survived} Beats(Months).")
+print(f"Hero Lifespan: {hero.beats_survived} Months.") # Not sure about the lore yet, completely arbitary.
 print("Solving...\n")
 time.sleep(2.5)
 
