@@ -40,6 +40,8 @@ print("Starting...") # Just making sure it's synced right on my end
 
 while hero.integrity > 0:
 
+    ACTIONS = ["Deflecting logic...", "Internalizing doubt...", "Processing evidence...", "Scanning Jurors..."]
+
     print("\n")
     time.sleep(bpm_delay)
     beat_count = (beat_count % 4) + 1
@@ -53,9 +55,12 @@ while hero.integrity > 0:
     jitter = " " * random.randint(0, 8)
     
     # 3. Execution
-    if beat_count == 4:
+    if beat_count == 4: # If Wall (AHHHHHHHH)
         hero = hero - 8
         print(f"{jitter}[{bar}] SNARE! -> {hero.name}")
+    elif beat_count == 2:
+        action = random.choice(ACTIONS)
+        print(f" >> [ACTION]: {action}")
     else:
         hero = hero - 2
         print(f"{jitter}[{bar}] kick")
