@@ -34,16 +34,29 @@ hero = Hero("Hermit", 150)
 bar_max_width = 20
 total_start_integrity = hero.integrity 
 beat_count = 0
-bpm_delay = round(60.00 / 170.00, 2)
+# Dynamic Delays
+min_d = 0.08 
+max_d = 0.35
+
+# Calculate the new delay based on current health %
+current_ratio = hero.integrity / total_start_integrity
+dynamic_delay = min_d + (max_d - min_d) * current_ratio
+
+time.sleep(dynamic_delay)
 
 print("Starting...") # Just making sure it's synced right on my end
 
 while hero.integrity > 0:
 
-    ACTIONS = ["Deflecting logic...", "Internalizing doubt...", "Processing evidence...", "Scanning Jurors..."]
+    ACTIONS = ["Deflecting border...", "Internalizing doubt...", "Processing memories...", "Scanning world..."]
 
     print("\n")
-    time.sleep(bpm_delay)
+    
+    current_ratio = hero.integrity / total_start_integrity
+    dynamic_delay = min_d + (max_d - min_d) * current_ratio
+
+    time.sleep(dynamic_delay)
+
     beat_count = (beat_count % 4) + 1
     
     # 1. Calculate bar fill
@@ -72,7 +85,7 @@ while hero.integrity > 0:
 
 
 # In your Singularity Print:
-print(f"Hero Lifespan: {hero.beats_survived} Months.") # Not sure about the lore yet, completely arbitary.
+print(f"\nHero Lifespan: {random.randint(3,8)} Months.") # Not sure about the lore yet, completely arbitary.
 print("Solving...\n")
 time.sleep(2.5)
 
@@ -86,8 +99,5 @@ singularity_art = """
 ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 [ ! ] STATUS: BECOMING A CONSTANT.
 """
-time.sleep(1) # Dramatic pause before the crash
 print(singularity_art)
-sys.stdout.flush() # Online Python - IDE, Editor, Compiler, Interpreter
-
-    
+sys.stdout.flush() # Online Python - IDE, Editor, Compiler, Interpreter    
