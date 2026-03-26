@@ -35,11 +35,11 @@ bar_max_width = 20
 total_start_integrity = hero.integrity 
 beat_count = 0
 # Dynamic Delays
-min_d = 0.08 
+min_d = 0.25 
 max_d = 0.35
 
 # Calculate the new delay based on current health %
-current_ratio = hero.integrity / total_start_integrity
+current_ratio = round(hero.integrity / total_start_integrity * 1.45) 
 dynamic_delay = min_d + (max_d - min_d) * current_ratio
 
 time.sleep(dynamic_delay)
@@ -52,7 +52,7 @@ while hero.integrity > 0:
 
     print("\n")
     
-    current_ratio = hero.integrity / total_start_integrity
+    current_ratio = round(hero.integrity / total_start_integrity * 1.45)
     dynamic_delay = min_d + (max_d - min_d) * current_ratio
 
     time.sleep(dynamic_delay)
