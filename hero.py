@@ -1,8 +1,14 @@
 import random
 import time
 import sys
+from datetime import datetime
+
+def log_print(msg):
+    timestamp = datetime.now().strftime("%H:%M:%S.%f")[:-3]
+    print(f"[{timestamp}] {msg}")
 
 class Hero:
+    
     def __init__(self, name, integrity=100):
         self.name = name
         self.integrity = integrity
@@ -12,6 +18,7 @@ class Hero:
         return f"ID:{self.name} | INT:{self.integrity}"
 
     def __sub__(self, amount):
+        
         clean_amount = abs(amount)
         new_integrity = max(0, self.integrity - clean_amount)
         new_name = self.name
@@ -30,6 +37,7 @@ class Hero:
             return Hero(new_name, 0)
             
         return Hero(new_name, new_integrity)
+
 
 # Dont make Integrity "0"
 hero = Hero("Hermit", 150)
@@ -62,24 +70,20 @@ while hero.integrity > 0:
 
     beat_count = (beat_count % 4) + 1
     
-    # 1. Calculate bar fill
-    # Using 'int' to keep it to whole blocks
     fill_count = int((hero.integrity / total_start_integrity) * bar_max_width)
     bar = "█" * fill_count + "░" * (bar_max_width - fill_count)
     
-    # 2. Add Jitter for that glitch feel
     jitter = " " * random.randint(0, 8)
     
-    # 3. Execution
     if beat_count == 4: # If Wall (AHHHHHHHH!!!)
         hero = hero - 8
-        print(f"{jitter}[{bar}] SNARE! -> {hero.name}")
+        log_print(f"{jitter}[{bar}] SNARE! -> {hero.name}")
     elif beat_count == 2:
         action = random.choice(ACTIONS)
-        print(f" >> [ACTION]: {action}")
+        log_print(f" >> [ACTION]: {action}")
     else:
         hero = hero - 2
-        print(f"{jitter}[{bar}] kick")
+        log_print(f"{jitter}[{bar}] kick")
         
     hero.beats_survived += 1
     
@@ -103,4 +107,4 @@ singularity_art = """
 [ ! ] STATUS: BECOMING A CONSTANT.
 """
 print(singularity_art)
-sys.stdout.flush() # Online Python - IDE, Editor, Compiler, Interpreter    
+sys.stdout.flush() # Online Python - IDE, Editor, Compiler, Interpreter      
