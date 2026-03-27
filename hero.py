@@ -34,11 +34,11 @@ hero = Hero("Hermit", 150)
 bar_max_width = 20
 total_start_integrity = hero.integrity 
 beat_count = 0
-# Dynamic Delays
-min_d = 0.25 
-max_d = 0.35
+# Dynamic Delays (seconds)
+min_d = 0.225 
+max_d = 0.350
 
-# Calculate the new delay based on current health %
+# Glitchy Beats
 current_ratio = round(hero.integrity / total_start_integrity * 1.45) 
 dynamic_delay = min_d + (max_d - min_d) * current_ratio
 
@@ -68,7 +68,7 @@ while hero.integrity > 0:
     jitter = " " * random.randint(0, 8)
     
     # 3. Execution
-    if beat_count == 4: # If Wall (AHHHHHHHH)
+    if beat_count == 4: # If Wall (AHHHHHHHH!!!)
         hero = hero - 8
         print(f"{jitter}[{bar}] SNARE! -> {hero.name}")
     elif beat_count == 2:
@@ -85,7 +85,7 @@ while hero.integrity > 0:
 
 
 # In your Singularity Print:
-print(f"\nHero Lifespan: {random.randint(3,8)} Months.") # Not sure about the lore yet, completely arbitary.
+print(f"\nHero Lifespan: {random.randint(3,10)} Months.") # Completely arbitary, not sure about the lore yet.
 print("Solving...\n")
 time.sleep(2.5)
 
