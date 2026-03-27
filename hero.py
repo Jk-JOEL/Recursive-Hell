@@ -3,7 +3,7 @@ import time
 import sys
 
 class Hero:
-    def __init__(self, name, integrity):
+    def __init__(self, name, integrity=100):
         self.name = name
         self.integrity = integrity
         self.beats_survived = 0
@@ -18,8 +18,10 @@ class Hero:
         
         if 0 < new_integrity < 50:
             char_list = list(self.name)
+            
             if random.random() < 0.3:
                 char_list.append(random.choice("!@#$%^&*░▒▓"))
+                
             random.shuffle(char_list)
             new_name = "".join(char_list)[:10]
 
@@ -29,6 +31,7 @@ class Hero:
             
         return Hero(new_name, new_integrity)
 
+# Dont make Integrity "0"
 hero = Hero("Hermit", 150)
 # Settings for the bar
 bar_max_width = 20
