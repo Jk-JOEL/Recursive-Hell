@@ -39,7 +39,7 @@ class Hero:
         return Hero(new_name, new_integrity)
 
 
-# Dont make Integrity "0"
+# Only Positive Integers
 hero = Hero("Hermit", 150)
 # Settings for the bar
 bar_max_width = 20
@@ -91,7 +91,6 @@ while hero.integrity > 0:
 
 
 
-# In your Singularity Print:
 print(f"\nHero Lifespan: {random.randint(3,10)} Months.") # Completely arbitary, not sure about the lore yet.
 print("Solving...\n")
 time.sleep(2.5)
